@@ -2918,3 +2918,28 @@ footer p {
         height: auto;
     }
 }
+/* =========================================
+   NORTH ADVISORY PORTFOLIO PREVIEW
+   ========================================= */
+
+.north-preview {
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    background: #0b1118;
+    border-bottom: 1px solid rgba(91, 142, 181, 0.18);
+}
+
+.north-preview img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    object-fit: contain;
+    object-position: top center;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-card:hover .north-preview img {
+    transform: scale(1.015);
+}
