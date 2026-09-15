@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Product | Curate Memories</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        .edit-product-page {
+            width: min(700px, 90%);
+            margin: 80px auto;
+        }
+
+        .edit-header {
+            margin-bottom: 40px;
+        }
+
+        .edit-header a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .edit-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .edit-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .edit-field label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .edit-field input,
+        .edit-field textarea,
+        .edit-field select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            border: 1px solid rgba(0,0,0,.2);
+            background: transparent;
+            font: inherit;
+        }
+
+        .edit-field textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .edit-checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .edit-checkbox input {
+            width: auto;
+        }
+
+        .edit-image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .edit-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .edit-save,
+        .edit-back {
+            padding: 14px 24px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+
+        .edit-save {
+            background: #000;
+            color: #fff;
+        }
+
+        .edit-back {
+            background: transparent;
+            color: #000;
+        }
+
+        .edit-message {
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <main class="edit-product-page">
+
+        <div class="edit-header">
+
+            <a href="dashboard.html">
+                ← BACK TO DASHBOARD
+            </a>
+
+            <h1>Edit Product</h1>
+
+        </div>
+
+
+        <form
+            class="edit-form"
+            id="editProductForm">
+
+            <div>
+
+                <img
+                    id="editImage"
+                    class="edit-image"
+                    alt="Product image">
+
+            </div>
+
+
+            <div class="edit-field">
+
+                <label for="editName">
+                    Product Name
+                </label>
+
+                <input
+                    type="text"
+                    id="editName"
+                    required>
+
+            </div>
+
+
+            <div class="edit-field">
+
+                <label for="editPrice">
+                    Price
+                </label>
+
+                <input
+                    type="number"
+                    id="editPrice"
+                    min="0"
+                    step="0.01"
+                    required>
+
+            </div>
+
+
+            <div class="edit-field">
+
+                <label for="editCategory">
+                    Category
+                </label>
+
+                <select id="editCategory">
+
+                    <option value="Stationery">
+                        Stationery
+                    </option>
+
+                    <option value="Table Details">
+                        Table Details
+                    </option>
+
+                    <option value="Wedding Details">
+                        Wedding Details
+                    </option>
+
+                    <option value="Gifts">
+                        Gifts
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="edit-field">
+
+                <label for="editDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="editDescription"
+                    required></textarea>
+
+            </div>
+
+
+            <div class="edit-field">
+
+                <label for="editImagePath">
+                    Image Path
+                </label>
+
+                <input
+                    type="text"
+                    id="editImagePath"
+                    placeholder="images/product.png"
+                    required>
+
+            </div>
+
+
+            <div class="edit-field">
+
+                <label for="editStock">
+                    Stock
+                </label>
+
+                <input
+                    type="number"
+                    id="editStock"
+                    min="0"
+                    required>
+
+            </div>
+
+
+            <label class="edit-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="editFeatured">
+
+                Featured product
+
+            </label>
+
+
+            <label class="edit-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="editActive">
+
+                Product active
+
+            </label>
+
+
+            <div class="edit-actions">
+
+                <button
+                    type="submit"
+                    class="edit-save"
+                    id="saveProduct">
+                    SAVE PRODUCT
+                </button>
+
+                <a
+                    href="dashboard.html"
+                    class="edit-back">
+                    CANCEL
+                </a>
+
+            </div>
+
+
+            <p
+                class="edit-message"
+                id="editMessage">
+            </p>
+
+        </form>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+                const params =
+                    new URLSearchParams(
+                        window.location.search
+                    );
+
+                const productId =
+                    params.get("id");
+
+
+                const {
+                    data: {
+                        session
+                    }
+                } =
+                    await supabaseClient.auth.getSession();
+
+
+                if (!session) {
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                if (!productId) {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                    return;
+
+                }
+
+
+                const {
+                    data: product,
+                    error
+                } =
+                    await supabaseClient
+                        .from("products")
+                        .select("*")
+                        .eq("id", productId)
+                        .single();
+
+
+                if (error || !product) {
+
+                    document.getElementById(
+                        "editMessage"
+                    ).textContent =
+                        "Could not load product.";
+
+                    console.error(error);
+
+                    return;
+
+                }
+
+
+                document.getElementById(
+                    "editName"
+                ).value = product.name || "";
+
+
+                document.getElementById(
+                    "editPrice"
+                ).value = product.price || 0;
+
+
+                document.getElementById(
+                    "editCategory"
+                ).value = product.category || "Stationery";
+
+
+                document.getElementById(
+                    "editDescription"
+                ).value = product.description || "";
+
+
+                document.getElementById(
+                    "editImagePath"
+                ).value = product.image || "";
+
+
+                document.getElementById(
+                    "editStock"
+                ).value = product.stock || 0;
+
+
+                document.getElementById(
+                    "editFeatured"
+                ).checked =
+                    Boolean(product.featured);
+
+
+                document.getElementById(
+                    "editActive"
+                ).checked =
+                    Boolean(product.active);
+
+
+document.getElementById(
+    "editImage"
+).src =
+    product.image.startsWith("http")
+        ? product.image
+        : "../" + product.image;
+
+
+                document.getElementById(
+                    "editProductForm"
+                ).addEventListener(
+                    "submit",
+                    async function (event) {
+
+                        event.preventDefault();
+
+
+                        const message =
+                            document.getElementById(
+                                "editMessage"
+                            );
+
+                        const saveButton =
+                            document.getElementById(
+                                "saveProduct"
+                            );
+
+
+                        saveButton.disabled = true;
+                        saveButton.textContent =
+                            "SAVING...";
+
+
+                        const updates = {
+
+                            name:
+                                document.getElementById(
+                                    "editName"
+                                ).value.trim(),
+
+                            price:
+                                Number(
+                                    document.getElementById(
+                                        "editPrice"
+                                    ).value
+                                ),
+
+                            category:
+                                document.getElementById(
+                                    "editCategory"
+                                ).value,
+
+                            description:
+                                document.getElementById(
+                                    "editDescription"
+                                ).value.trim(),
+
+                            image:
+                                document.getElementById(
+                                    "editImagePath"
+                                ).value.trim(),
+
+                            stock:
+                                Number(
+                                    document.getElementById(
+                                        "editStock"
+                                    ).value
+                                ),
+
+                            featured:
+                                document.getElementById(
+                                    "editFeatured"
+                                ).checked,
+
+                            active:
+                                document.getElementById(
+                                    "editActive"
+                                ).checked
+
+                        };
+
+
+                        const {
+                            error: updateError
+                        } =
+                            await supabaseClient
+                                .from("products")
+                                .update(updates)
+                                .eq("id", productId);
+
+
+                        if (updateError) {
+
+                            console.error(
+                                updateError
+                            );
+
+                            message.textContent =
+                                "Could not save product.";
+
+                            saveButton.disabled = false;
+                            saveButton.textContent =
+                                "SAVE PRODUCT";
+
+                            return;
+
+                        }
+
+
+                        message.textContent =
+                            "Product saved successfully.";
+
+                        saveButton.disabled = false;
+                        saveButton.textContent =
+                            "SAVED ✓";
+
+
+document.getElementById(
+    "editImage"
+).src =
+    updates.image.startsWith("http")
+        ? updates.image
+        : "../" + updates.image;
+
+
+                        setTimeout(function () {
+
+                            saveButton.textContent =
+                                "SAVE PRODUCT";
+
+                        }, 1500);
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

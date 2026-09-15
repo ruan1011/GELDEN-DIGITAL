@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Shop | Curate Memories</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="site-header">
+
+        <nav class="navbar">
+
+            <a
+                href="../index.html"
+                class="brand">
+
+                <img
+                    src="../images/logo.png"
+                    alt="Curate Memories">
+
+            </a>
+
+            <div class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="index.html">
+                    Shop
+                </a>
+
+                <a href="../index.html#collections">
+                    Collections
+                </a>
+
+                <a href="../index.html#contact">
+                    Contact
+                </a>
+
+            </div>
+
+            <div class="nav-actions">
+
+                <button
+                    class="cart-btn"
+                    id="cartBtn"
+                    type="button">
+
+                    Bag
+
+                    <span
+                        class="cart-count">
+                        0
+                    </span>
+
+                </button>
+
+                <button
+                    class="menu-btn"
+                    id="menuButton"
+                    type="button"
+                    aria-label="Open menu">
+
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+
+    <!-- SHOP -->
+
+    <main>
+
+        <section class="shop-page">
+
+            <div class="shop-heading">
+
+                <span class="shop-eyebrow">
+                    CURATE MEMORIES
+                </span>
+
+                <h1>
+                    The Collection
+                </h1>
+
+                <p>
+                    Thoughtfully curated details for life's
+                    beautiful moments.
+                </p>
+
+            </div>
+
+
+            <!-- CONTROLS -->
+<div class="shop-search">
+
+    <input
+        type="search"
+        id="shopSearch"
+        placeholder="Search the collection..."
+        autocomplete="off">
+
+</div>
+            <div class="shop-controls">
+
+                <div class="shop-filters">
+
+                    <button
+                        class="shop-filter active"
+                        data-category="All"
+                        type="button">
+                        All
+                    </button>
+
+                    <button
+                        class="shop-filter"
+                        data-category="Stationery"
+                        type="button">
+                        Stationery
+                    </button>
+
+                    <button
+                        class="shop-filter"
+                        data-category="Table Details"
+                        type="button">
+                        Table Details
+                    </button>
+
+                    <button
+                        class="shop-filter"
+                        data-category="Wedding Details"
+                        type="button">
+                        Wedding Details
+                    </button>
+
+                    <button
+                        class="shop-filter"
+                        data-category="Gifts"
+                        type="button">
+                        Gifts
+                    </button>
+
+                </div>
+
+
+                <div class="shop-sort">
+
+                    <label for="sortProducts">
+                        SORT
+                    </label>
+
+                    <select id="sortProducts">
+
+                        <option value="featured">
+                            Featured
+                        </option>
+
+                        <option value="price-low">
+                            Price: Low to High
+                        </option>
+
+                        <option value="price-high">
+                            Price: High to Low
+                        </option>
+
+                        <option value="name">
+                            Name
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRODUCTS -->
+
+            <div
+                class="shop-product-grid"
+                id="shopProductGrid">
+            </div>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+                class="shop-empty"
+                id="shopEmpty"
+                style="display: none;">
+
+                <h2>
+                    Nothing found
+                </h2>
+
+                <p>
+                    We couldn't find any products in this collection.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- BAG OVERLAY -->
+
+    <div
+        class="bag-overlay"
+        id="bagOverlay">
+    </div>
+
+
+    <!-- BAG -->
+
+    <aside
+        class="bag-panel"
+        id="bagPanel">
+
+        <div class="bag-header">
+
+            <div>
+
+                <span class="bag-label">
+                    YOUR COLLECTION
+                </span>
+
+                <h2>
+                    Your Bag
+                </h2>
+
+            </div>
+
+            <button
+                class="bag-close"
+                id="bagClose"
+                type="button">
+
+                ×
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="bag-items"
+            id="bagItems">
+        </div>
+
+
+        <div class="bag-footer">
+
+            <div class="bag-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong id="bagTotal">
+                    R0
+                </strong>
+
+            </div>
+
+<form class="checkout-form" id="checkoutForm">
+
+    <div class="checkout-form-group">
+        <label for="checkoutName">FULL NAME</label>
+        <input
+            type="text"
+            id="checkoutName"
+            name="name"
+            placeholder="Your full name"
+            required>
+    </div>
+
+    <div class="checkout-form-group">
+        <label for="checkoutPhone">PHONE NUMBER</label>
+        <input
+            type="tel"
+            id="checkoutPhone"
+            name="phone"
+            placeholder="Your phone number"
+            required>
+    </div>
+
+    <div class="checkout-form-group">
+        <label for="checkoutEmail">EMAIL <span>OPTIONAL</span></label>
+        <input
+            type="email"
+            id="checkoutEmail"
+            name="email"
+            placeholder="Your email address">
+    </div>
+
+    <div class="checkout-form-group">
+        <label for="checkoutNotes">ORDER NOTES <span>OPTIONAL</span></label>
+        <textarea
+            id="checkoutNotes"
+            name="notes"
+            rows="3"
+            placeholder="Anything you'd like us to know?"></textarea>
+    </div>
+
+    <button
+        class="bag-checkout"
+        id="bagCheckout"
+        type="submit">
+
+        PLACE ORDER
+
+        <span>→</span>
+
+    </button>
+
+    <p class="bag-note" id="checkoutMessage">
+        Your order will be securely recorded before
+        you are taken to WhatsApp.
+    </p>
+
+</form>
+
+        </div>
+
+    </aside>
+
+
+    <!-- JAVASCRIPT -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/products.js"></script>
+<script src="../js/main.js"></script>
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const grid = document.getElementById("shopProductGrid");
+    const empty = document.getElementById("shopEmpty");
+    const searchInput = document.getElementById("shopSearch");
+    const sortSelect = document.getElementById("sortProducts");
+    const filterButtons = document.querySelectorAll(".shop-filter");
+
+    let currentCategory = "All";
+    let currentSearch = "";
+
+    function renderShop() {
+
+        let filteredProducts = products.filter(function (product) {
+
+            const matchesCategory =
+                currentCategory === "All" ||
+                product.category === currentCategory;
+
+            const searchText = (
+                product.name + " " +
+                product.category + " " +
+                product.description
+            ).toLowerCase();
+
+            const matchesSearch =
+                searchText.includes(currentSearch.toLowerCase());
+
+            return matchesCategory && matchesSearch;
+        });
+
+        if (sortSelect) {
+
+            if (sortSelect.value === "price-low") {
+                filteredProducts.sort(function (a, b) {
+                    return a.price - b.price;
+                });
+            }
+
+            if (sortSelect.value === "price-high") {
+                filteredProducts.sort(function (a, b) {
+                    return b.price - a.price;
+                });
+            }
+
+            if (sortSelect.value === "name") {
+                filteredProducts.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+            }
+
+            if (sortSelect.value === "featured") {
+                filteredProducts.sort(function (a, b) {
+                    return Number(b.featured) - Number(a.featured);
+                });
+            }
+        }
+
+        grid.innerHTML = "";
+
+        if (filteredProducts.length === 0) {
+            empty.style.display = "block";
+            return;
+        }
+
+        empty.style.display = "none";
+
+        filteredProducts.forEach(function (product) {
+
+            const card = document.createElement("article");
+            card.className = "shop-product-card";
+
+            card.innerHTML = `
+                <div class="shop-product-image">
+
+                    <img
+                        src="${product.image.startsWith("http") ? product.image : "../" + product.image}"
+                        alt="${product.name}">
+
+                    ${
+                        product.stock <= 0
+                        ? `
+                            <span class="shop-sold-out">
+                                SOLD OUT
+                            </span>
+                        `
+                        : `
+                            <button
+                                class="shop-add"
+                                type="button">
+                                + ADD TO BAG
+                            </button>
+                        `
+                    }
+
+                </div>
+
+                <div class="shop-product-details">
+
+                    <div>
+                        <span>${product.category}</span>
+
+                        <h2>
+                            ${product.name}
+                        </h2>
+                    </div>
+
+                    <strong>
+                        R${product.price.toLocaleString("en-ZA")}
+                    </strong>
+
+                </div>
+            `;
+
+            card.addEventListener("click", function (event) {
+
+                if (event.target.closest(".shop-add")) {
+                    return;
+                }
+
+                window.location.href =
+                    "../product/index.html?id=" +
+                    encodeURIComponent(product.id);
+            });
+
+            const addButton = card.querySelector(".shop-add");
+
+            if (addButton) {
+
+                addButton.addEventListener("click", function (event) {
+
+                    event.stopPropagation();
+
+                    let cart =
+                        JSON.parse(
+                            localStorage.getItem("curateMemoriesCart")
+                        ) || [];
+
+                    const existing = cart.find(function (item) {
+                        return item.name === product.name;
+                    });
+
+if (existing) {
+
+    if (existing.quantity < Number(product.stock)) {
+
+        existing.quantity++;
+
+    } else {
+
+        alert(
+            "Sorry, only " +
+            product.stock +
+            " of this product is available."
+        );
+
+        return;
+    }
+
+} else {
+
+    cart.push({
+    product_id: product.id,
+    name: product.name,
+    price: product.price,
+    category: product.category,
+    quantity: 1
+});
+
+}
+
+                    localStorage.setItem(
+                        "curateMemoriesCart",
+                        JSON.stringify(cart)
+                    );
+
+                    updateShopCartCount();
+
+                    addButton.textContent = "ADDED ✓";
+
+                    setTimeout(function () {
+                        addButton.textContent = "+ ADD TO BAG";
+                    }, 1200);
+
+                });
+            }
+
+            grid.appendChild(card);
+        });
+    }
+
+    function updateShopCartCount() {
+
+        const count = document.querySelector(".cart-count");
+
+        if (!count) return;
+
+        const cart =
+            JSON.parse(
+                localStorage.getItem("curateMemoriesCart")
+            ) || [];
+
+        count.textContent =
+            cart.reduce(function (total, item) {
+                return total + (Number(item.quantity) || 1);
+            }, 0);
+    }
+
+    /* SEARCH */
+
+    if (searchInput) {
+
+        searchInput.addEventListener("input", function () {
+            currentSearch = searchInput.value.trim();
+            renderShop();
+        });
+
+    }
+
+    /* FILTERS */
+
+    filterButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            filterButtons.forEach(function (item) {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+            currentCategory = button.dataset.category;
+
+            renderShop();
+        });
+
+    });
+
+    /* SORT */
+
+    if (sortSelect) {
+        sortSelect.addEventListener("change", renderShop);
+    }
+
+    /* OPEN SEARCH FROM HOMEPAGE */
+
+    if (window.location.hash === "#shopSearch") {
+
+        setTimeout(function () {
+
+            if (searchInput) {
+
+                searchInput.focus();
+
+                searchInput.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }
+
+        }, 300);
+
+    }
+
+window.productsReady.then(function () {
+    renderShop();
+});
+
+updateShopCartCount();
+
+});
+</script>
+
+</body>
+
+</html>

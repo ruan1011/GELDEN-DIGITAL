@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product | Curate Memories</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header class="site-header">
+    <nav class="navbar">
+
+        <a href="../index.html" class="brand">
+            <img src="../images/logo.png" alt="Curate Memories">
+        </a>
+
+        <div class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="../shop/index.html">Shop</a>
+            <a href="../index.html#collections">Collections</a>
+            <a href="../index.html#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button class="cart-btn" id="cartBtn" type="button">
+                Bag
+                <span class="cart-count">0</span>
+            </button>
+
+            <button class="menu-btn" id="menuButton" type="button" aria-label="Open menu">
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+    </nav>
+</header>
+
+<main>
+
+<section class="product-page">
+
+    <div class="product-page-image">
+        <img id="productImage" src="" alt="">
+    </div>
+
+    <div class="product-page-content">
+
+        <span class="product-page-category" id="productCategory"></span>
+
+        <h1 id="productName"></h1>
+
+        <strong class="product-page-price" id="productPrice"></strong>
+
+        <div class="product-page-divider"></div>
+
+        <p class="product-page-description" id="productDescription"></p>
+
+        <div class="product-page-stock">
+            <span>Availability</span>
+            <strong id="productStock"></strong>
+        </div>
+
+        <div class="product-quantity">
+            <button type="button" id="quantityMinus">−</button>
+            <span id="quantityValue">1</span>
+            <button type="button" id="quantityPlus">+</button>
+        </div>
+
+        <button class="product-page-add" id="productAdd" type="button">
+            ADD TO COLLECTION
+            <span>+</span>
+        </button>
+
+        <a class="product-page-back" href="../shop/index.html">
+            ← Back to collection
+        </a>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- BAG OVERLAY -->
+<div class="bag-overlay" id="bagOverlay"></div>
+
+<!-- BAG -->
+<aside class="bag-panel" id="bagPanel">
+
+    <div class="bag-header">
+        <div>
+            <span class="bag-label">YOUR COLLECTION</span>
+            <h2>Your Bag</h2>
+        </div>
+
+        <button class="bag-close" id="bagClose" type="button">×</button>
+    </div>
+
+    <div class="bag-items" id="bagItems"></div>
+
+    <div class="bag-footer">
+
+        <div class="bag-total">
+            <span>Total</span>
+            <strong id="bagTotal">R0</strong>
+        </div>
+
+        <button class="bag-checkout" id="bagCheckout" type="button">
+            CHECKOUT VIA WHATSAPP
+            <span>→</span>
+        </button>
+
+        <p class="bag-note">
+            Your order will be sent directly to Curate Memories via WhatsApp.
+        </p>
+
+    </div>
+
+</aside>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/supabase.js"></script>
+<script src="../js/products.js"></script>
+<script src="../js/main.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+window.productsReady.then(function () {
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    const product = products.find(function (item) {
+    return String(item.id) === String(productId);    
+    });
+
+    if (!product) {
+        window.location.replace("../shop/index.html");
+        return;
+    }
+
+    const productImage = document.getElementById("productImage");
+    const productName = document.getElementById("productName");
+    const productCategory = document.getElementById("productCategory");
+    const productPrice = document.getElementById("productPrice");
+    const productDescription = document.getElementById("productDescription");
+    const productStock = document.getElementById("productStock");
+    const quantityValue = document.getElementById("quantityValue");
+    const quantityMinus = document.getElementById("quantityMinus");
+    const quantityPlus = document.getElementById("quantityPlus");
+    const productAdd = document.getElementById("productAdd");
+
+    let quantity = 1;
+
+    /* =========================
+       PRODUCT DETAILS
+    ========================= */
+
+   productImage.src =
+    product.image.startsWith("http")
+        ? product.image
+        : "../" + product.image;
+    productImage.alt = product.name;
+
+    productName.textContent = product.name;
+    productCategory.textContent = product.category;
+    productPrice.textContent =
+        "R" + product.price.toLocaleString("en-ZA");
+    productDescription.textContent = product.description;
+
+
+    /* =========================
+       GET CURRENT CART
+    ========================= */
+
+    function getCart() {
+
+        return JSON.parse(
+            localStorage.getItem("curateMemoriesCart")
+        ) || [];
+
+    }
+
+
+    /* =========================
+       GET QUANTITY ALREADY IN BAG
+    ========================= */
+
+    function getQuantityInCart() {
+
+        const cart = getCart();
+
+        const existing = cart.find(function (item) {
+            return item.name === product.name;
+        });
+
+        return existing
+            ? Number(existing.quantity) || 0
+            : 0;
+
+    }
+
+
+    /* =========================
+       UPDATE PRODUCT PAGE
+    ========================= */
+
+    function updateProductPage() {
+
+        const totalStock =
+            Number(product.stock) || 0;
+
+        const quantityInCart =
+            getQuantityInCart();
+
+        const remainingStock =
+            Math.max(
+                0,
+                totalStock - quantityInCart
+            );
+
+
+        /* STOCK DISPLAY */
+
+        if (remainingStock <= 0) {
+
+            productStock.textContent =
+                "Sold out";
+
+            productAdd.disabled = true;
+
+            productAdd.style.opacity = "0.45";
+            productAdd.style.cursor = "not-allowed";
+
+            quantity = 0;
+
+        } else {
+
+            productStock.textContent =
+                remainingStock + " available";
+
+            productAdd.disabled = false;
+
+            productAdd.style.opacity = "";
+            productAdd.style.cursor = "";
+
+            if (quantity < 1) {
+                quantity = 1;
+            }
+
+            if (quantity > remainingStock) {
+                quantity = remainingStock;
+            }
+
+        }
+
+
+        quantityValue.textContent = quantity;
+
+
+        /* DISABLE PLUS WHEN MAXIMUM REACHED */
+
+        if (
+            remainingStock <= 0 ||
+            quantity >= remainingStock
+        ) {
+
+            quantityPlus.disabled = true;
+
+        } else {
+
+            quantityPlus.disabled = false;
+
+        }
+
+
+        /* DISABLE MINUS AT 1 */
+
+        if (quantity <= 1) {
+
+            quantityMinus.disabled = true;
+
+        } else {
+
+            quantityMinus.disabled = false;
+
+        }
+
+    }
+
+
+    /* =========================
+       MINUS
+    ========================= */
+
+    quantityMinus.addEventListener(
+        "click",
+        function () {
+
+            if (quantity > 1) {
+
+                quantity--;
+
+                updateProductPage();
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       PLUS
+    ========================= */
+
+    quantityPlus.addEventListener(
+        "click",
+        function () {
+
+            const remainingStock =
+                Math.max(
+                    0,
+                    Number(product.stock) -
+                    getQuantityInCart()
+                );
+
+
+            if (quantity < remainingStock) {
+
+                quantity++;
+
+                updateProductPage();
+
+            } else {
+
+                alert(
+                    "Sorry, only " +
+                    remainingStock +
+                    " of this product is available."
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       ADD TO BAG
+    ========================= */
+
+    productAdd.addEventListener(
+        "click",
+        function () {
+
+            if (quantity < 1) {
+                return;
+            }
+
+
+            let cart = getCart();
+
+            const existing =
+                cart.find(function (item) {
+                    return item.name === product.name;
+                });
+
+
+            const currentQuantity =
+                existing
+                    ? Number(existing.quantity) || 0
+                    : 0;
+
+
+            const totalRequested =
+                currentQuantity + quantity;
+
+
+            /* STOCK CHECK */
+
+            if (
+                totalRequested >
+                Number(product.stock)
+            ) {
+
+                const remaining =
+                    Number(product.stock) -
+                    currentQuantity;
+
+                alert(
+                    "Sorry, only " +
+                    remaining +
+                    " of this product is available."
+                );
+
+                updateProductPage();
+
+                return;
+            }
+
+
+            /* ADD / UPDATE */
+
+            if (existing) {
+
+                existing.quantity =
+                    currentQuantity + quantity;
+
+            } else {
+
+                cart.push({
+
+                    name: product.name,
+                    price: product.price,
+                    category: product.category,
+                    quantity: quantity
+
+                });
+
+            }
+
+
+            /* SAVE CART */
+
+            localStorage.setItem(
+                "curateMemoriesCart",
+                JSON.stringify(cart)
+            );
+
+
+            /* UPDATE BAG COUNT */
+
+            const cartCount =
+                document.querySelector(".cart-count");
+
+            if (cartCount) {
+
+                cartCount.textContent =
+                    cart.reduce(
+                        function (total, item) {
+
+                            return total +
+                                (Number(item.quantity) || 0);
+
+                        },
+                        0
+                    );
+
+            }
+
+
+            /* BUTTON FEEDBACK */
+
+            productAdd.innerHTML =
+                'ADDED ✓ <span>+</span>';
+
+
+            setTimeout(
+                function () {
+
+                    productAdd.innerHTML =
+                        'ADD TO COLLECTION <span>+</span>';
+
+                },
+                1200
+            );
+
+
+            /* RESET SELECTED QUANTITY */
+
+            quantity = 1;
+
+
+            /* REFRESH AVAILABILITY */
+
+            updateProductPage();
+
+        }
+    );
+
+
+    /* =========================
+       INITIAL LOAD
+    ========================= */
+
+    updateProductPage();
+
+});
+});
+</script>
+
+</body>
+</html>

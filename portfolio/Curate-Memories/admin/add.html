@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Product | Curate Memories</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+
+        .add-product-page {
+            width: min(700px, 90%);
+            margin: 80px auto;
+        }
+
+        .add-header {
+            margin-bottom: 40px;
+        }
+
+        .add-header a {
+            color: inherit;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .add-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .add-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .add-field label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .add-field input,
+        .add-field textarea,
+        .add-field select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px;
+            border: 1px solid rgba(0,0,0,.2);
+            background: transparent;
+            font: inherit;
+        }
+
+        .add-field textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .add-checkbox {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .add-checkbox input {
+            width: auto;
+        }
+
+        .add-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .add-save,
+        .add-back {
+            padding: 14px 24px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+
+        .add-save {
+            background: #000;
+            color: #fff;
+        }
+
+        .add-back {
+            background: transparent;
+            color: #000;
+            text-decoration: none;
+        }
+
+        .add-message {
+            margin-top: 20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <main class="add-product-page">
+
+        <div class="add-header">
+
+            <a href="dashboard.html">
+                ← BACK TO DASHBOARD
+            </a>
+
+            <h1>Add Product</h1>
+
+        </div>
+
+
+        <form
+            class="add-form"
+            id="addProductForm">
+
+
+            <div class="add-field">
+
+                <label for="addName">
+                    Product Name
+                </label>
+
+                <input
+                    type="text"
+                    id="addName"
+                    required>
+
+            </div>
+
+
+            <div class="add-field">
+
+                <label for="addPrice">
+                    Price
+                </label>
+
+                <input
+                    type="number"
+                    id="addPrice"
+                    min="0"
+                    step="0.01"
+                    required>
+
+            </div>
+
+
+            <div class="add-field">
+
+                <label for="addCategory">
+                    Category
+                </label>
+
+                <select id="addCategory">
+
+                    <option value="Stationery">
+                        Stationery
+                    </option>
+
+                    <option value="Table Details">
+                        Table Details
+                    </option>
+
+                    <option value="Wedding Details">
+                        Wedding Details
+                    </option>
+
+                    <option value="Gifts">
+                        Gifts
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="add-field">
+
+                <label for="addDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="addDescription"
+                    required></textarea>
+
+            </div>
+
+
+<div class="add-field">
+
+    <label for="addImageFile">
+        Product Image
+    </label>
+
+    <input
+        type="file"
+        id="addImageFile"
+        accept="image/png,image/jpeg,image/webp"
+        required>
+
+</div>
+
+
+            <div class="add-field">
+
+                <label for="addStock">
+                    Stock
+                </label>
+
+                <input
+                    type="number"
+                    id="addStock"
+                    min="0"
+                    value="0"
+                    required>
+
+            </div>
+
+
+            <label class="add-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="addFeatured">
+
+                Featured product
+
+            </label>
+
+
+            <label class="add-checkbox">
+
+                <input
+                    type="checkbox"
+                    id="addActive"
+                    checked>
+
+                Product active
+
+            </label>
+
+
+            <div class="add-actions">
+
+                <button
+                    type="submit"
+                    class="add-save"
+                    id="addSave">
+                    ADD PRODUCT
+                </button>
+
+                <a
+                    href="dashboard.html"
+                    class="add-back">
+                    CANCEL
+                </a>
+
+            </div>
+
+
+            <p
+                class="add-message"
+                id="addMessage">
+            </p>
+
+        </form>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async function () {
+
+
+                /* =========================
+                   CHECK LOGIN
+                ========================= */
+
+                const {
+                    data: {
+                        session
+                    }
+                } =
+                    await supabaseClient.auth.getSession();
+
+
+                if (!session) {
+
+                    window.location.href =
+                        "index.html";
+
+                    return;
+
+                }
+
+
+                /* =========================
+                   ADD PRODUCT
+                ========================= */
+
+                document
+                    .getElementById("addProductForm")
+                    .addEventListener(
+                        "submit",
+                        async function (event) {
+
+                            event.preventDefault();
+
+
+                            const button =
+                                document.getElementById(
+                                    "addSave"
+                                );
+
+                            const message =
+                                document.getElementById(
+                                    "addMessage"
+                                );
+
+
+                            button.disabled = true;
+
+                            button.textContent =
+                                "ADDING...";
+
+
+ const imageFile =
+    document.getElementById("addImageFile").files[0];
+
+if (!imageFile) {
+
+    message.textContent =
+        "Please select an image.";
+
+    button.disabled = false;
+    button.textContent =
+        "ADD PRODUCT";
+
+    return;
+
+}
+
+
+/* =========================
+   UPLOAD IMAGE
+========================= */
+
+const fileExtension =
+    imageFile.name.split(".").pop();
+
+const fileName =
+    crypto.randomUUID() +
+    "." +
+    fileExtension;
+
+
+const {
+    error: uploadError
+} =
+    await supabaseClient
+        .storage
+        .from("product-images")
+        .upload(
+            fileName,
+            imageFile
+        );
+
+
+if (uploadError) {
+
+    console.error(uploadError);
+
+    message.textContent =
+        "Could not upload image.";
+
+    button.disabled = false;
+    button.textContent =
+        "ADD PRODUCT";
+
+    return;
+
+}
+
+
+/* =========================
+   GET IMAGE URL
+========================= */
+
+const {
+    data: publicUrlData
+} =
+    supabaseClient
+        .storage
+        .from("product-images")
+        .getPublicUrl(fileName);
+
+
+const imageUrl =
+    publicUrlData.publicUrl;
+
+
+/* =========================
+   CREATE PRODUCT
+========================= */
+
+const newProduct = {
+
+    name:
+        document.getElementById(
+            "addName"
+        ).value.trim(),
+
+    price:
+        Number(
+            document.getElementById(
+                "addPrice"
+            ).value
+        ),
+
+    category:
+        document.getElementById(
+            "addCategory"
+        ).value,
+
+    description:
+        document.getElementById(
+            "addDescription"
+        ).value.trim(),
+
+    image:
+        imageUrl,
+
+    stock:
+        Number(
+            document.getElementById(
+                "addStock"
+            ).value
+        ),
+
+    featured:
+        document.getElementById(
+            "addFeatured"
+        ).checked,
+
+    active:
+        document.getElementById(
+            "addActive"
+        ).checked
+
+};
+
+
+const {
+    data,
+    error
+} =
+    await supabaseClient
+        .from("products")
+        .insert(newProduct)
+        .select()
+        .single();
+
+
+                            if (error) {
+
+                                console.error(error);
+
+                                message.textContent =
+                                    "Could not add product.";
+
+                                button.disabled = false;
+
+                                button.textContent =
+                                    "ADD PRODUCT";
+
+                                return;
+
+                            }
+
+
+                            message.textContent =
+                                "Product added successfully.";
+
+
+                            button.textContent =
+                                "ADDED ✓";
+
+
+                            setTimeout(function () {
+
+                                window.location.href =
+                                    "dashboard.html";
+
+                            }, 1000);
+
+                        }
+                    );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Curate Memories</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        .admin-dashboard {
+            width: min(1200px, 90%);
+            margin: 80px auto;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+        }
+
+        .admin-logout {
+            padding: 12px 20px;
+            border: 1px solid #000;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .admin-products {
+            display: grid;
+            gap: 15px;
+        }
+
+        .admin-product {
+            display: grid;
+            grid-template-columns: 80px 1fr 120px 120px 140px;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid rgba(0,0,0,.12);
+        }
+
+        .admin-product img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+        }
+
+        .admin-product h3 {
+            margin: 0 0 5px;
+        }
+
+        .admin-product p {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .stock-input {
+            width: 80px;
+            padding: 10px;
+        }
+
+        .save-stock {
+            padding: 10px 15px;
+            border: none;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .save-stock:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .admin-message {
+            margin-top: 25px;
+        }
+
+        @media (max-width: 768px) {
+
+            .admin-product {
+                grid-template-columns: 60px 1fr;
+            }
+
+            .admin-product img {
+                width: 60px;
+                height: 60px;
+            }
+
+        }
+        /* =========================================
+   CURATE MEMORIES — ADMIN DASHBOARD
+========================================= */
+
+:root {
+    --admin-bg: #f7f4ef;
+    --admin-card: #ffffff;
+    --admin-text: #111111;
+    --admin-muted: #77736d;
+    --admin-border: #e6e1d9;
+    --admin-black: #111111;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+body {
+    background: var(--admin-bg);
+    color: var(--admin-text);
+}
+
+
+/* =========================================
+   DASHBOARD CONTAINER
+========================================= */
+
+.admin-dashboard {
+    width: min(1380px, 92%);
+    margin: 0 auto;
+    padding: 70px 0 100px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.admin-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid var(--admin-border);
+    margin-bottom: 35px;
+}
+
+.admin-header > div:first-child > span {
+    display: block;
+    margin-bottom: 12px;
+
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    color: var(--admin-muted);
+}
+
+.admin-header h1 {
+    margin: 0;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 400;
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+}
+
+
+/* =========================================
+   TOP ACTIONS
+========================================= */
+
+.admin-header > div:last-child {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.admin-header a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+    padding: 0 22px;
+
+    background: var(--admin-black);
+    color: #fff;
+
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.admin-header a:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+
+/* LOGOUT */
+
+.admin-logout {
+    min-height: 48px;
+    padding: 0 22px;
+
+    border: 1px solid #cfcac2;
+    background: transparent;
+
+    color: var(--admin-text);
+
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.admin-logout:hover {
+    background: #fff;
+    border-color: #999;
+}
+
+
+/* =========================================
+   PRODUCT LIST
+========================================= */
+
+.admin-products {
+    display: grid;
+    gap: 14px;
+}
+
+
+/* =========================================
+   PRODUCT CARD
+========================================= */
+
+.admin-product {
+    display: grid;
+
+    grid-template-columns:
+        100px
+        minmax(220px, 1fr)
+        110px
+        120px
+        180px;
+
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 20px 24px;
+
+    background: var(--admin-card);
+
+    border: 1px solid var(--admin-border);
+
+    transition:
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+.admin-product:hover {
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .05);
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   PRODUCT IMAGE
+========================================= */
+
+.admin-product img {
+    display: block;
+
+    width: 100px;
+    height: 100px;
+
+    object-fit: cover;
+
+    background: #eee;
+
+    border: 1px solid var(--admin-border);
+}
+
+
+/* =========================================
+   PRODUCT INFORMATION
+========================================= */
+
+.admin-product h3 {
+    margin: 0 0 8px;
+
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 21px;
+    font-weight: 400;
+
+    line-height: 1.2;
+}
+
+.admin-product p {
+    margin: 0;
+
+    color: var(--admin-muted);
+
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+.admin-product strong {
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 18px;
+    font-weight: 400;
+}
+
+
+/* =========================================
+   STOCK
+========================================= */
+
+.stock-input {
+    width: 100%;
+    max-width: 90px;
+
+    box-sizing: border-box;
+
+    padding: 12px 10px;
+
+    border: 1px solid #d5d0c8;
+
+    background: #faf9f7;
+
+    color: var(--admin-text);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color .2s ease,
+        background .2s ease;
+}
+
+.stock-input:focus {
+    border-color: #111;
+    background: #fff;
+}
+
+
+/* =========================================
+   ADMIN BUTTONS
+========================================= */
+
+.admin-product > div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+
+/* SAVE */
+
+.save-stock {
+    width: 100%;
+
+    padding: 11px 14px;
+
+    border: 1px solid var(--admin-black);
+    background: var(--admin-black);
+    color: #fff;
+
+    font-family: inherit;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        transform .2s ease;
+}
+
+.save-stock:hover {
+    background: #333;
+    transform: translateY(-1px);
+}
+
+
+/* EDIT */
+
+.edit-product {
+    width: 100%;
+
+    padding: 11px 14px !important;
+
+    border: 1px solid #d0cbc3 !important;
+    background: #fff !important;
+    color: #111 !important;
+
+    font-family: inherit;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.edit-product:hover {
+    background: #f5f2ed !important;
+    border-color: #aaa !important;
+}
+
+
+/* ACTIVE / DEACTIVATE */
+
+.toggle-active {
+    width: 100%;
+
+    padding: 11px 14px !important;
+
+    border: 1px solid #d0cbc3 !important;
+    background: #fff !important;
+    color: #555 !important;
+
+    font-family: inherit;
+    font-size: 9px;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        background .2s ease,
+        border-color .2s ease;
+}
+
+.toggle-active:hover {
+    background: #f5f2ed !important;
+    border-color: #aaa !important;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.admin-message {
+    margin: 22px 0 0;
+
+    color: var(--admin-muted);
+
+    font-size: 12px;
+    letter-spacing: .5px;
+}
+
+
+/* =========================================
+   EMPTY / LOADING
+========================================= */
+
+.admin-products > p {
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: var(--admin-muted);
+
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+    .admin-dashboard {
+        width: min(92%, 650px);
+        padding: 45px 0 70px;
+    }
+
+    .admin-header {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-bottom: 30px;
+    }
+
+    .admin-header h1 {
+        font-size: 42px;
+    }
+
+    .admin-header > div:last-child {
+        width: 100%;
+    }
+
+    .admin-header a,
+    .admin-logout {
+        flex: 1;
+    }
+
+    .admin-product {
+        grid-template-columns: 80px 1fr;
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .admin-product img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .admin-product > div:nth-child(3),
+    .admin-product > div:nth-child(4),
+    .admin-product > div:nth-child(5) {
+        grid-column: 2;
+    }
+
+    .admin-product > div:nth-child(3) {
+        margin-top: 5px;
+    }
+
+    .admin-product > div:nth-child(4) {
+        display: flex;
+        align-items: center;
+    }
+
+    .admin-product > div:nth-child(5) {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 7px;
+    }
+
+}
+    /* =========================================
+   DASHBOARD STATS
+========================================= */
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 35px;
+}
+
+.admin-stat {
+    background: var(--admin-card);
+    border: 1px solid var(--admin-border);
+    padding: 25px;
+}
+
+.admin-stat span {
+    display: block;
+    color: var(--admin-muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.admin-stat strong {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    font-weight: 400;
+}
+
+@media (max-width: 768px) {
+
+    .admin-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 520px) {
+
+    .admin-dashboard {
+        width: 90%;
+    }
+
+    .admin-header h1 {
+        font-size: 36px;
+    }
+
+    .admin-header > div:last-child {
+        flex-direction: column;
+    }
+
+    .admin-header a,
+    .admin-logout {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-product {
+        grid-template-columns: 65px 1fr;
+        padding: 15px;
+    }
+
+    .admin-product img {
+        width: 65px;
+        height: 65px;
+    }
+
+    .admin-product h3 {
+        font-size: 17px;
+    }
+
+    .admin-product > div:nth-child(5) {
+        grid-template-columns: 1fr;
+    }
+
+
+}
+    </style>
+</head>
+
+<body>
+
+    <main class="admin-dashboard">
+
+        <div class="admin-header">
+
+            <div>
+                <span>CURATE MEMORIES</span>
+                <h1>Product Dashboard</h1>
+            </div>
+        <a href="orders.html" class="admin-button secondary">
+    Orders
+</a>    
+
+            <a
+    href="add.html"
+    style="
+        display:inline-block;
+        margin-top:15px;
+        padding:15px 10px;
+        background:#000;
+        color:#fff;
+        text-decoration:none;
+    ">
+    + ADD PRODUCT
+</a>
+            <button
+                class="admin-logout"
+                id="logoutButton">
+                LOG OUT
+            </button>
+
+        </div>
+
+</div>
+
+<!-- DASHBOARD STATS -->
+<div class="admin-stats">
+
+    <div class="admin-stat">
+        <span>PRODUCTS</span>
+        <strong id="statProducts">—</strong>
+    </div>
+
+    <div class="admin-stat">
+        <span>ACTIVE</span>
+        <strong id="statActive">—</strong>
+    </div>
+
+    <div class="admin-stat">
+        <span>NEW ORDERS</span>
+        <strong id="statOrders">—</strong>
+    </div>
+
+    <div class="admin-stat">
+        <span>REVENUE</span>
+        <strong id="statRevenue">—</strong>
+    </div>
+
+</div>
+
+<div
+    class="admin-products"
+    id="adminProducts">
+</div>
+
+        <p
+            class="admin-message"
+            id="adminMessage">
+        </p>
+
+    </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../js/supabase.js"></script>
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", async function () {
+
+            const adminProducts =
+                document.getElementById("adminProducts");
+
+            const adminMessage =
+                document.getElementById("adminMessage");
+
+
+            /* =========================
+               CHECK LOGIN
+            ========================= */
+
+            const {
+                data: {
+                    session
+                }
+            } = await supabaseClient.auth.getSession();
+
+
+            if (!session) {
+
+                window.location.href = "index.html";
+                return;
+
+            }
+/* =========================
+   LOAD DASHBOARD STATS
+========================= */
+
+async function loadStats() {
+
+    const [
+        productsResult,
+        ordersResult
+    ] = await Promise.all([
+
+        supabaseClient
+            .from("products")
+            .select("id, active"),
+
+        supabaseClient
+            .from("orders")
+            .select("total, status")
+    ]);
+
+    if (productsResult.error) {
+        console.error("Products stats error:", productsResult.error);
+    }
+
+    if (ordersResult.error) {
+        console.error("Orders stats error:", ordersResult.error);
+    }
+
+    const products = productsResult.data || [];
+    const orders = ordersResult.data || [];
+
+    const activeProducts =
+        products.filter(function (product) {
+            return product.active === true;
+        }).length;
+
+    const newOrders =
+        orders.filter(function (order) {
+            return order.status === "new";
+        }).length;
+
+    const revenue =
+        orders.reduce(function (total, order) {
+            return total + Number(order.total || 0);
+        }, 0);
+
+    document.getElementById("statProducts").textContent =
+        products.length;
+
+    document.getElementById("statActive").textContent =
+        activeProducts;
+
+    document.getElementById("statOrders").textContent =
+        newOrders;
+
+    document.getElementById("statRevenue").textContent =
+        "R" + revenue.toLocaleString("en-ZA");
+}
+
+            /* =========================
+               LOAD PRODUCTS
+            ========================= */
+
+            async function loadProducts() {
+
+                adminProducts.innerHTML =
+                    "<p>Loading products...</p>";
+
+                const {
+                    data,
+                    error
+                } = await supabaseClient
+                    .from("products")
+                    .select("*")
+                    .order("id");
+
+
+                if (error) {
+
+                    console.error(error);
+
+                    adminProducts.innerHTML =
+                        "<p>Could not load products.</p>";
+
+                    return;
+
+                }
+
+
+                adminProducts.innerHTML = "";
+
+
+                data.forEach(function (product) {
+
+                    const item =
+                        document.createElement("div");
+
+                    item.className =
+                        "admin-product";
+
+
+                    item.innerHTML = `
+
+                        <img
+                            src="${product.image.startsWith("http") ? product.image : "../" + product.image}"
+                            alt="${product.name}">
+
+                        <div>
+
+                            <h3>
+                                ${product.name}
+                            </h3>
+
+                            <p>
+                                ${product.category}
+                            </p>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                R${Number(product.price).toLocaleString("en-ZA")}
+                            </strong>
+
+                        </div>
+
+                        <div>
+
+                            <input
+                                class="stock-input"
+                                type="number"
+                                min="0"
+                                value="${product.stock}"
+                                data-id="${product.id}">
+
+                        </div>
+
+<div>
+
+    <button
+        class="save-stock"
+        data-id="${product.id}">
+        SAVE
+    </button>
+
+    <button
+        class="edit-product"
+        data-id="${product.id}"
+        style="margin-top:8px; padding:10px 15px; cursor:pointer;">
+        EDIT
+    </button>
+
+    <button
+    class="toggle-active"
+    data-id="${product.id}"
+    style="
+        margin-top:8px;
+        padding:10px 15px;
+        cursor:pointer;
+    ">
+    ${product.active ? "DEACTIVATE" : "ACTIVATE"}
+</button>
+
+</div>
+
+                    `;
+
+
+                    adminProducts.appendChild(item);
+                    const editButton =
+    item.querySelector(".edit-product");
+
+editButton.addEventListener(
+    "click",
+    function () {
+
+        const id =
+            editButton.dataset.id;
+
+        window.location.href =
+            "edit.html?id=" +
+            encodeURIComponent(id);
+
+    }
+);
+
+/* =========================
+   TOGGLE ACTIVE
+========================= */
+
+const activeButton =
+    item.querySelector(".toggle-active");
+
+activeButton.addEventListener(
+    "click",
+    async function () {
+
+        const id =
+            activeButton.dataset.id;
+
+        const currentActive =
+            product.active;
+
+        activeButton.disabled = true;
+
+        activeButton.textContent =
+            "SAVING...";
+
+
+        const {
+            error
+        } =
+            await supabaseClient
+                .from("products")
+                .update({
+                    active: !currentActive
+                })
+                .eq("id", id);
+
+
+        if (error) {
+
+            console.error(error);
+
+            activeButton.disabled = false;
+
+            activeButton.textContent =
+                currentActive
+                    ? "DEACTIVATE"
+                    : "ACTIVATE";
+
+            return;
+
+        }
+
+
+        activeButton.disabled = false;
+
+        activeButton.textContent =
+            currentActive
+                ? "ACTIVATED"
+                : "DEACTIVATED";
+
+
+        setTimeout(function () {
+            loadStats();
+            loadProducts();
+
+        }, 700);
+
+    }
+);
+                });
+
+
+                /* =========================
+                   SAVE STOCK
+                ========================= */
+
+                document
+                    .querySelectorAll(".save-stock")
+                    .forEach(function (button) {
+
+                        button.addEventListener(
+                            "click",
+                            async function () {
+
+                                const id =
+                                    button.dataset.id;
+
+                                const input =
+                                    document.querySelector(
+                                        `.stock-input[data-id="${id}"]`
+                                    );
+
+                                const stock =
+                                    Number(input.value);
+
+
+                                if (stock < 0) {
+                                    return;
+                                }
+
+
+                                button.disabled = true;
+                                button.textContent =
+                                    "SAVING...";
+
+
+                                const {
+                                    error
+                                } = await supabaseClient
+                                    .from("products")
+                                    .update({
+                                        stock: stock
+                                    })
+                                    .eq("id", id);
+
+
+                                if (error) {
+
+                                    console.error(error);
+
+                                    adminMessage.textContent =
+                                        "Could not update stock.";
+
+                                    button.disabled = false;
+                                    button.textContent =
+                                        "SAVE";
+
+                                    return;
+
+                                }
+
+
+                                adminMessage.textContent =
+                                    "Stock updated successfully.";
+
+                                button.disabled = false;
+                                button.textContent =
+                                    "SAVED ✓";
+
+
+                                setTimeout(function () {
+
+                                    button.textContent =
+                                        "SAVE";
+
+                                }, 1200);
+
+                            }
+                        );
+
+                    });
+
+            }
+
+      
+
+
+
+            /* =========================
+               LOG OUT
+            ========================= */
+
+            document
+                .getElementById("logoutButton")
+                .addEventListener(
+                    "click",
+                    async function () {
+
+                        await supabaseClient.auth.signOut();
+
+                        window.location.href =
+                            "index.html";
+
+                    }
+                );
+
+               loadStats();     
+            loadProducts();
+
+        });
+
+    </script>
+
+</body>
+
+</html>

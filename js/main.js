@@ -1,70 +1,94 @@
-// =========================
-// GELDEN DIGITAL
-// QUOTE FORM
-// =========================
+document.addEventListener("DOMContentLoaded", function () {
 
-const quoteForm = document.getElementById("quote-form");
+    /* =========================
+       NAVBAR
+    ========================= */
 
-if (quoteForm) {
+    const navbar = document.querySelector(".navbar");
 
-    quoteForm.addEventListener("submit", function (event) {
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("name").value;
-
-        const business =
-            document.getElementById("business").value;
-
-        const email =
-            document.getElementById("email").value;
-
-        const phone =
-            document.getElementById("phone").value;
-
-        const service =
-            document.getElementById("service").value;
-
-        const message =
-            document.getElementById("message").value;
+    if (navbar) {
+        window.addEventListener("scroll", function () {
+            navbar.classList.toggle("scrolled", window.scrollY > 40);
+        });
+    }
 
 
-        const whatsappMessage =
-            `Hi Gelden Digital!
+    /* =========================
+       SMOOTH SCROLL
+    ========================= */
 
-` +
-            `I'd like to enquire about a website.
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 
-` +
-            `Name: ${name}
-` +
-            `Business: ${business}
-` +
-            `Email: ${email}
-` +
-            `Phone: ${phone}
-` +
-            `Service: ${service}
+        link.addEventListener("click", function (event) {
 
-` +
-            `Project details:
-${message}`;
+            const targetId = this.getAttribute("href");
 
+            if (!targetId || targetId === "#") return;
 
-        const encodedMessage =
-            encodeURIComponent(whatsappMessage);
+            const target = document.querySelector(targetId);
 
+            if (target) {
+                event.preventDefault();
 
-        const whatsappURL =
-            `https://wa.me/27836072557?text=${encodedMessage}`;
-
-
-        window.open(
-            whatsappURL,
-            "_blank"
-        );
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
 
     });
 
-}
+
+    /* =========================
+       GELDEN DIGITAL QUOTE FORM
+    ========================= */
+
+    const quoteForm = document.getElementById("quote-form");
+
+    if (quoteForm) {
+
+        quoteForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const business = document.getElementById("business").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const service = document.getElementById("service").value;
+            const message = document.getElementById("message").value.trim();
+
+            const whatsappNumber = "27836072557";
+
+            const whatsappMessage =
+`Hello Gelden Digital! 👋
+
+I'd like to request a quote for a website.
+
+Name: ${name}
+Business: ${business}
+Email: ${email}
+Phone: ${phone}
+
+Service:
+${service}
+
+Project details:
+${message}
+
+Thank you!`;
+
+            const whatsappURL =
+                "https://wa.me/" +
+                whatsappNumber +
+                "?text=" +
+                encodeURIComponent(whatsappMessage);
+
+            window.open(whatsappURL, "_blank");
+
+        });
+
+    }
+
+});

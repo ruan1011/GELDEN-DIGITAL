@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Curate Memories | Curated for life's beautiful moments.</title>
+
+    <meta name="description"
+          content="Curate Memories — beautifully curated details for life's most beautiful moments.">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="site-header">
+        <nav class="navbar">
+
+            <a href="#" class="brand">
+                <img src="images/logo.png" alt="Curate Memories">
+            </a>
+
+            <div class="nav-links">
+                <a href="shop/index.html">Shop</a>
+                <a href="#collections">Collections</a>
+                <a href="#contact">Contact</a>
+            </div>
+
+<div class="nav-actions">
+
+    <button
+        class="search-btn"
+        id="searchBtn"
+        aria-label="Search">
+        Search
+    </button>
+
+                <button class="cart-btn" id="cartBtn" aria-label="Shopping bag">
+                Bag <span class="cart-count">0</span>
+                </button>
+            </div>
+
+            <button class="menu-btn" aria-label="Open menu">
+                <span></span>
+                <span></span>
+            </button>
+
+        </nav>
+    </header>
+
+
+    <!-- HERO -->
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <p class="eyebrow">
+                    WEDDINGS • CELEBRATIONS • BEAUTIFUL DETAILS
+                </p>
+
+                <h1>
+                    Curated for life's
+                    <em>beautiful moments.</em>
+                </h1>
+
+                <p class="hero-description">
+                    Thoughtfully chosen pieces for celebrations
+                    worth remembering.
+                </p>
+
+                <a href="#shop" class="hero-button">
+                    Explore the collection
+                    <span>↗</span>
+                </a>
+
+            </div>
+
+            <div class="hero-image">
+                <img src="images/hero.png" alt="Curate Memories luxury wedding stationery">
+            </div>
+
+
+        </section>
+
+
+        <!-- INTRO -->
+        <section class="intro">
+
+            <div class="intro-label">
+                <span>01</span>
+                <span>THE COLLECTION</span>
+            </div>
+
+            <div class="intro-content">
+
+                <h2>
+                    The details make
+                    <em>the memory.</em>
+                </h2>
+
+                <p>
+                    From the first invitation to the final table setting,
+                    we believe the smallest details have the power to make
+                    life's biggest moments unforgettable.
+                </p>
+
+                <a href="#collections" class="text-link">
+                    Discover our collections
+                    <span>→</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- COLLECTIONS -->
+        <section class="collections" id="collections">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-number">02</span>
+                    <span class="section-label">SHOP BY COLLECTION</span>
+                </div>
+
+                <h2>
+                    Beautifully
+                    <em>considered.</em>
+                </h2>
+
+            </div>
+
+
+            <div class="collection-grid">
+
+                <a href="#shop" class="collection-card collection-large">
+
+                    <div class="collection-image">
+                        <img src="images/invitation.png" alt="Luxury wedding invitations">
+                    </div>
+
+                    <div class="collection-info">
+                        <h3>Invitations</h3>
+                        <span>Explore collection →</span>
+                    </div>
+
+                </a>
+
+
+                <a href="#shop" class="collection-card">
+
+                    <div class="collection-image">
+                         <img src="images/decor.png" alt="Elegant wedding table décor">
+                    </div>
+
+                    <div class="collection-info">
+                        <h3>Wedding Décor</h3>
+                        <span>Explore collection →</span>
+                    </div>
+
+                </a>
+
+
+                <a href="#shop" class="collection-card">
+
+                    <div class="collection-image">
+                        <img src="images/gifts.png" alt="Elegant wedding gifts">
+                    </div>
+
+                    <div class="collection-info">
+                        <h3>Gifts</h3>
+                        <span>Explore collection →</span>
+                    </div>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURED PRODUCTS -->
+        <section class="featured" id="shop">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-number">03</span>
+                    <span class="section-label">CURATED FAVOURITES</span>
+                </div>
+
+                <a href="#" class="view-all">
+                    View all pieces →
+                </a>
+
+            </div>
+
+                <div class="product-grid" id="productGrid"></div>
+
+        </section>
+
+<section class="contact" id="contact">
+
+    <div class="contact-inner">
+
+        <div class="contact-intro">
+
+            <span class="section-label">04 GET IN TOUCH</span>
+
+            <h2>
+                Planning something
+                <em>beautiful?</em>
+            </h2>
+
+            <p>
+                Tell us what you're looking for and we'll help you
+                curate the details.
+            </p>
+
+        </div>
+
+
+        <div class="contact-form-wrap">
+
+            <form id="quoteForm">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="name">Your name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone number</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Your phone number"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="event">Occasion</label>
+
+                    <select id="event" name="event" required>
+                        <option value="" disabled selected>
+                            Select an occasion
+                        </option>
+                        <option value="Wedding">
+                            Wedding
+                        </option>
+                        <option value="Engagement">
+                            Engagement
+                        </option>
+                        <option value="Bridal Shower">
+                            Bridal Shower
+                        </option>
+                        <option value="Birthday">
+                            Birthday
+                        </option>
+                        <option value="Other">
+                            Other celebration
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="date">Event date</label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            name="date"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="items">Interested in</label>
+
+                        <select id="items" name="items" required>
+
+                            <option value="" disabled selected>
+                                Select a collection
+                            </option>
+
+                            <option value="Invitations">
+                                Invitations
+                            </option>
+
+                            <option value="Wedding Décor">
+                                Wedding Décor
+                            </option>
+
+                            <option value="Gifts">
+                                Gifts
+                            </option>
+
+                            <option value="Multiple collections">
+                                Multiple collections
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Tell us a little more
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="5"
+                        placeholder="Tell us what you're looking for..."
+                    ></textarea>
+
+                </div>
+
+
+                <button type="submit" class="contact-submit">
+                    REQUEST A QUOTE <span>→</span>
+                </button>
+
+                <p class="form-note">
+                    Your enquiry will open directly in WhatsApp.
+                </p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+   <footer class="footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+            <img src="images/logo.png" alt="Curate Memories">
+
+            <p>curated for life's beautiful moments</p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <div class="footer-column">
+
+                <span>EXPLORE</span>
+
+                <a href="#collections">Collections</a>
+                <a href="#shop">Featured Pieces</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <span>CONNECT</span>
+
+                <a href="https://wa.me/27739215627" target="_blank">
+                    WhatsApp
+                </a>
+
+                <a href="#">
+                    Instagram
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>© 2026 Curate Memories</span>
+
+        <span>curated for life's beautiful moments</span>
+
+    </div>
+
+</footer>
+<!-- SHOPPING BAG -->
+
+<div class="bag-overlay" id="bagOverlay"></div>
+
+<aside class="bag-panel" id="bagPanel">
+
+    <div class="bag-header">
+        <div>
+            <span class="bag-label">YOUR COLLECTION</span>
+            <h2>Your Bag</h2>
+        </div>
+
+        <button class="bag-close" id="bagClose" aria-label="Close bag">
+            ×
+        </button>
+    </div>
+
+    <div class="bag-items" id="bagItems">
+
+        <div class="bag-empty">
+            <p>Your bag is currently empty.</p>
+            <span>Add something beautiful to your collection.</span>
+        </div>
+
+    </div>
+
+    <div class="bag-footer">
+
+        <div class="bag-total">
+            <span>Total</span>
+            <strong id="bagTotal">R0</strong>
+        </div>
+
+<form class="checkout-form" id="checkoutForm">
+
+    <div class="checkout-form-group">
+        <label for="checkoutName">FULL NAME</label>
+        <input
+            type="text"
+            id="checkoutName"
+            name="name"
+            placeholder="Your full name"
+            required>
+    </div>
+
+    <div class="checkout-form-group">
+        <label for="checkoutPhone">PHONE NUMBER</label>
+        <input
+            type="tel"
+            id="checkoutPhone"
+            name="phone"
+            placeholder="Your phone number"
+            required>
+    </div>
+
+    <div class="checkout-form-group">
+        <label for="checkoutEmail">EMAIL <span>OPTIONAL</span></label>
+        <input
+            type="email"
+            id="checkoutEmail"
+            name="email"
+            placeholder="Your email address">
+    </div>
+
+    <div class="checkout-form-group">
+        <label for="checkoutNotes">ORDER NOTES <span>OPTIONAL</span></label>
+        <textarea
+            id="checkoutNotes"
+            name="notes"
+            rows="3"
+            placeholder="Anything you'd like us to know?"></textarea>
+    </div>
+
+    <button
+        class="bag-checkout"
+        id="bagCheckout"
+        type="submit">
+
+        PLACE ORDER
+
+        <span>→</span>
+
+    </button>
+
+    <p class="bag-note" id="checkoutMessage">
+        Your order will be securely recorded before
+        you are taken to WhatsApp.
+    </p>
+
+</form>
+    </div>
+
+</aside>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/products.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
