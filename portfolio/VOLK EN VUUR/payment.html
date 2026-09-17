@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="af">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Betaling | Volk & Vuur</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+     ===================================================== -->
+
+<header class="site-header">
+
+    <nav class="navbar">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            <img
+                src="images/volk-logo.png"
+                alt="Volk & Vuur"
+            >
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Tuis
+            </a>
+
+            <a href="index.html#shop">
+                Winkel
+            </a>
+
+            <a href="index.html#categories">
+                Kategorieë
+            </a>
+
+            <a href="index.html#about">
+                Ons Storie
+            </a>
+
+            <a href="index.html#contact">
+                Kontak
+            </a>
+
+        </div>
+
+
+        <a
+            href="cart.html"
+            class="cart-button"
+        >
+
+            <span>🛒</span>
+
+            <span>
+                Mandjie
+            </span>
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >
+                0
+            </span>
+
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     PAYMENT PAGE
+     ===================================================== -->
+
+<main>
+
+<section class="payment-page">
+
+
+    <div class="payment-heading">
+
+        <p class="eyebrow">
+            VOLK & VUUR
+        </p>
+
+        <h1>
+            Kies jou
+            <span> betaling.</span>
+        </h1>
+
+
+
+    </div>
+
+
+
+    <div class="payment-layout">
+
+
+        <!-- PAYMENT METHODS -->
+
+        <div class="payment-methods">
+
+            <div class="payment-section-title">
+
+
+
+                <div>
+
+                    <p class="eyebrow">
+                        BETALING
+                    </p>
+
+                    <h2>
+                        Betaalmetode
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="card"
+                    checked
+                >
+
+                <div class="payment-option-content">
+
+                    <strong>
+                        Kaartbetaling
+                    </strong>
+
+                    <span>
+                        Visa / Mastercard
+                    </span>
+
+                </div>
+
+                <span class="payment-option-icon">
+                    💳
+                </span>
+
+            </label>
+
+
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="eft"
+                >
+
+                <div class="payment-option-content">
+
+                    <strong>
+                        EFT / Bankbetaling
+                    </strong>
+
+                    <span>
+                        Betaal direk vanaf jou bankrekening
+                    </span>
+
+                </div>
+
+                <span class="payment-option-icon">
+                    🏦
+                </span>
+
+            </label>
+
+
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="capitec"
+                >
+
+                <div class="payment-option-content">
+
+                    <strong>
+                        Capitec Pay
+                    </strong>
+
+                    <span>
+                        Vinnige mobiele betaling
+                    </span>
+
+                </div>
+
+                <span class="payment-option-icon">
+                    📱
+                </span>
+
+            </label>
+
+
+
+            <div class="demo-payment-notice">
+
+                <strong>
+                    DEMO WINKEL
+                </strong>
+
+                <p>
+                    Hierdie betaalmetodes is tans
+                    demonstrasie-opsies. Geen werklike
+                    betaling sal gemaak word nie.
+                </p>
+
+            </div>
+
+
+
+            <button
+                type="button"
+                class="place-order-button"
+                id="completePaymentButton"
+            >
+                Voltooi bestelling
+            </button>
+
+
+            <a
+                href="checkout.html"
+                class="back-to-cart"
+            >
+                ← Terug na besonderhede
+            </a>
+
+        </div>
+
+
+
+        <!-- ORDER SUMMARY -->
+
+        <aside class="payment-summary">
+
+            <p class="eyebrow">
+                JOU BESTELLING
+            </p>
+
+            <h2>
+                Opsomming
+            </h2>
+
+
+            <div id="paymentItems">
+                <!-- Products loaded by JavaScript -->
+            </div>
+
+
+            <div class="checkout-summary-divider">
+            </div>
+
+
+            <div class="checkout-summary-total">
+
+                <span>
+                    Totaal
+                </span>
+
+                <strong id="paymentTotal">
+                    R0
+                </strong>
+
+            </div>
+
+
+            <p class="secure-checkout">
+                🔒 Veilige demo-betaling
+            </p>
+
+        </aside>
+
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<footer class="footer">
+
+    <p>
+        © 2025 Volk & Vuur.
+        Alles vir die perfekte braai.
+    </p>
+
+</footer>
+
+
+
+<script src="js/main.js"></script>
+
+</body>
+
+</html>
