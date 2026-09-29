@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="af">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Jou Mandjie | Volk & Vuur</title>
+    <title>Your Cart | Volk & Vuur</title>
 
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -23,16 +23,16 @@
         </a>
 
         <div class="nav-links">
-            <a href="index.html">Tuis</a>
-            <a href="index.html#shop">Winkel</a>
-            <a href="index.html#categories">Kategorieë</a>
-            <a href="index.html#about">Ons Storie</a>
-            <a href="index.html#contact">Kontak</a>
+            <a href="index.html">Home</a>
+            <a href="index.html#shop">Shop</a>
+            <a href="index.html#categories">Categories</a>
+            <a href="index.html#about">Our Story</a>
+            <a href="index.html#contact">Contact</a>
         </div>
 
         <a href="cart.html" class="cart-button">
             <span>🛒</span>
-            <span>Mandjie</span>
+            <span>Cart</span>
             <span class="cart-count" id="cartCount">0</span>
         </a>
 
@@ -47,14 +47,12 @@
 
         <div class="cart-page-heading">
 
-
-
             <h1>
-                Jou<span> Mandjie.</span>
+                Your<span> Cart.</span>
             </h1>
 
             <p>
-                Hersien jou produkte voordat jy voortgaan na betaling.
+                Review your products before proceeding to payment.
             </p>
 
         </div>
@@ -67,9 +65,9 @@
             <div class="cart-items-section">
 
                 <div class="cart-items-header">
-                    <span>Produk</span>
-                    <span>Hoeveelheid</span>
-                    <span>Totaal</span>
+                    <span>Product</span>
+                    <span>Quantity</span>
+                    <span>Total</span>
                 </div>
 
                 <div id="cartItems">
@@ -77,15 +75,15 @@
                     <div class="cart-empty">
 
                         <h2>
-                            Jou mandjie is leeg.
+                            Your cart is empty.
                         </h2>
 
                         <p>
-                            Voeg iets lekker by vir jou volgende braai.
+                            Add something delicious for your next braai.
                         </p>
 
                         <a href="index.html#shop" class="cart-continue">
-                            Begin inkopies doen
+                            Continue Shopping
                         </a>
 
                     </div>
@@ -100,39 +98,39 @@
             <aside class="cart-summary">
 
                 <p class="eyebrow">
-                    BESTELLING
+                    ORDER
                 </p>
 
                 <h2>
-                    Opsomming
+                    Summary
                 </h2>
 
                 <div class="summary-row">
-                    <span>Subtotaal</span>
+                    <span>Subtotal</span>
                     <strong id="cartSubtotal">R0</strong>
                 </div>
 
                 <div class="summary-row">
-                    <span>Aflewering</span>
-                    <span id="deliveryPrice">Word bereken</span>
+                    <span>Delivery</span>
+                    <span id="deliveryPrice">To be calculated</span>
                 </div>
 
                 <div class="summary-divider"></div>
 
                 <div class="summary-total">
-                    <span>Totaal</span>
+                    <span>Total</span>
                     <strong id="cartTotal">R0</strong>
                 </div>
 
- <a href="checkout.html" class="checkout-button" id="checkoutButton">
-    Gaan voort na betaling
-</a>
+                <a href="checkout.html" class="checkout-button" id="checkoutButton">
+                    Continue to Payment
+                </a>
 
                 <a
                     href="index.html#shop"
                     class="continue-shopping"
                 >
-                    ← Gaan voort met inkopies
+                    ← Continue Shopping
                 </a>
 
             </aside>
@@ -156,12 +154,14 @@
     </div>
 
     <span>
-        © 2025 Volk & Vuur. Alle regte voorbehou.
+        © 2025 Volk & Vuur. All rights reserved.
     </span>
 
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 <script src="js/main.js"></script>
 
 </body>

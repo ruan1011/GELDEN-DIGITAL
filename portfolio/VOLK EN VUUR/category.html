@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Category | Volk & Vuur</title>
+
+    <meta
+        name="description"
+        content="Browse products from Volk & Vuur."
+    >
+
+    <link rel="stylesheet" href="css/style.css">
+<style>
+/* CATEGORY PRODUCTS — 4 PER ROW */
+#categoryProducts {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+}
+
+#categoryProducts .product-card {
+    width: 100%;
+    min-width: 0;
+}
+
+@media (max-width: 1050px) {
+    #categoryProducts {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 750px) {
+    #categoryProducts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+}
+
+@media (max-width: 500px) {
+    #categoryProducts {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}
+</style>
+
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            <img
+                src="images/volk-logo.png"
+                alt="Volk & Vuur"
+            >
+        </a>
+
+        <div class="nav-links">
+
+            <a href="index.html#home">Home</a>
+            <a href="index.html#shop">Shop</a>
+            <a href="index.html#categories">Categories</a>
+            <a href="index.html#about">Our Story</a>
+            <a href="index.html#contact">Contact</a>
+
+        </div>
+
+        <a href="cart.html" class="cart-button">
+
+            <span>🛒</span>
+
+            <span>Cart</span>
+
+            <span
+                class="cart-count"
+                id="cartCount"
+            >0</span>
+
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="shop-section category-products-page">
+
+        <div class="section-heading shop-heading">
+
+            <div>
+
+                <p class="eyebrow">
+                    VOLK & VUUR
+                </p>
+
+                <h1 id="categoryTitle">
+                    Loading...
+                </h1>
+
+                <p id="categoryDescription">
+                    Loading products...
+                </p>
+
+            </div>
+
+            <a
+                href="index.html#categories"
+                class="view-all"
+            >
+                ← Back to Categories
+            </a>
+
+        </div>
+
+
+        <div
+            id="categoryLoading"
+            class="category-loading"
+        >
+            Loading products...
+        </div>
+
+
+        <div
+            id="categoryProducts"
+            class="products-grid"
+        ></div>
+
+
+        <div
+            id="categoryEmpty"
+            class="category-empty"
+            style="display:none;"
+        >
+
+            <h2>No products found</h2>
+
+            <p>
+                There are currently no products in this category.
+            </p>
+
+            <a
+                href="index.html#categories"
+                class="btn btn-primary"
+            >
+                Browse Categories
+            </a>
+
+        </div>
+
+
+        <div
+            id="categoryError"
+            class="category-empty"
+            style="display:none;"
+        >
+
+            <h2>Something went wrong</h2>
+
+            <p>
+                We could not load this category. Please try again.
+            </p>
+
+            <a
+                href="index.html#categories"
+                class="btn btn-primary"
+            >
+                Back to Categories
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div>
+
+            <img
+                src="images/volk-logo.png"
+                alt="Volk & Vuur"
+                class="footer-logo"
+            >
+
+            <p>
+                Alles vir die perfekte braai.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+<script src="js/main.js"></script>
+<script src="js/category.js"></script>
+
+</body>
+
+</html>

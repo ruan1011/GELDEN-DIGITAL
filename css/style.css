@@ -1698,3 +1698,255 @@ footer {
         transition-duration: 0.01ms !important;
     }
 }
+/* =========================================================
+   CATEGORY MODAL
+   ========================================================= */
+
+#categoryModal {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+
+    margin: 0 !important;
+    padding: 20px !important;
+
+    box-sizing: border-box !important;
+
+    background: rgba(0, 0, 0, 0.78) !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 999999 !important;
+}
+
+#categoryModal .admin-modal-content {
+    position: relative !important;
+
+    width: 520px !important;
+    max-width: calc(100vw - 40px) !important;
+
+    background: #ffffff !important;
+    color: #171717 !important;
+
+    box-sizing: border-box !important;
+
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35) !important;
+}
+
+#categoryModal .admin-modal-header {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+
+    padding: 30px 35px 25px !important;
+
+    border-bottom: 1px solid #ddd6cc !important;
+}
+
+#categoryModal .admin-modal-header h2 {
+    margin: 0 !important;
+
+    font-family: Georgia, serif !important;
+    font-size: 26px !important;
+}
+
+#categoryModal .admin-modal-close {
+    border: none !important;
+    background: none !important;
+
+    font-size: 30px !important;
+    line-height: 1 !important;
+
+    cursor: pointer !important;
+
+    color: #555 !important;
+}
+
+#categoryModal #categoryForm {
+    padding: 30px 35px 35px !important;
+}
+
+#categoryModal .admin-form-group {
+    display: flex !important;
+    flex-direction: column !important;
+
+    gap: 7px !important;
+
+    margin-bottom: 22px !important;
+}
+
+#categoryModal .admin-form-group label {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+
+    text-transform: uppercase !important;
+    letter-spacing: 0.8px !important;
+}
+
+#categoryModal .admin-form-group input {
+    width: 100% !important;
+
+    min-height: 48px !important;
+
+    padding: 12px 14px !important;
+
+    border: 1px solid #ccc !important;
+
+    background: #fff !important;
+
+    box-sizing: border-box !important;
+
+    font-family: inherit !important;
+    font-size: 14px !important;
+}
+
+#categoryModal .admin-modal-actions {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 14px !important;
+
+    padding-top: 20px !important;
+
+    border-top: 1px solid #ddd6cc !important;
+}
+
+#categoryModal .admin-secondary-button,
+#categoryModal .admin-primary-button {
+    height: 50px !important;
+
+    padding: 0 28px !important;
+
+    border-radius: 0 !important;
+
+    cursor: pointer !important;
+}
+
+/* =========================
+   CATEGORY MODAL
+========================= */
+
+#categoryModal {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+
+    background: rgba(0, 0, 0, 0.78) !important;
+
+    display: none;
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 999999 !important;
+}
+
+#categoryModal .admin-modal-content {
+    width: 100%;
+    max-width: 520px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+#categoryModal .admin-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+#categoryModal .admin-modal-header h2 {
+    margin: 0;
+    font-size: 26px;
+    color: #222;
+}
+
+#categoryModal .admin-modal-close {
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    color: #555;
+}
+
+#categoryModal .admin-form-group {
+    margin-bottom: 18px;
+}
+
+#categoryModal .admin-form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+    color: #333;
+}
+
+#categoryModal .admin-form-group input[type="text"],
+#categoryModal .admin-form-group input[type="number"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d5d5d5;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 15px;
+}
+
+#categoryModal .admin-form-group input:focus {
+    outline: none;
+    border-color: #b51f2b;
+    box-shadow: 0 0 0 2px rgba(181, 31, 43, 0.12);
+}
+
+#categoryModal .admin-switch-row {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+#categoryModal .admin-switch-row input {
+    width: 18px;
+    height: 18px;
+}
+
+#categoryModal .admin-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+#categoryModal .admin-secondary-button,
+#categoryModal .admin-primary-button {
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+
+#categoryModal .admin-secondary-button {
+    background: #eeeeee;
+    color: #333;
+}
+
+#categoryModal .admin-primary-button {
+    background: #b51f2b;
+    color: white;
+}
+
+#categoryModal .admin-primary-button:hover {
+    background: #941923;
+}

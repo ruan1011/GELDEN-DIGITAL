@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="af">
+<html lang="en">
 
 <head>
 
@@ -10,7 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Betaling | Volk & Vuur</title>
+    <title>Payment | Volk & Vuur</title>
 
     <link
         rel="stylesheet"
@@ -45,23 +45,23 @@
         <div class="nav-links">
 
             <a href="index.html">
-                Tuis
+                Home
             </a>
 
             <a href="index.html#shop">
-                Winkel
+                Shop
             </a>
 
             <a href="index.html#categories">
-                Kategorieë
+                Categories
             </a>
 
             <a href="index.html#about">
-                Ons Storie
+                Our Story
             </a>
 
             <a href="index.html#contact">
-                Kontak
+                Contact
             </a>
 
         </div>
@@ -75,7 +75,7 @@
             <span>🛒</span>
 
             <span>
-                Mandjie
+                Cart
             </span>
 
             <span
@@ -97,223 +97,95 @@
      PAYMENT PAGE
      ===================================================== -->
 
-<main>
+<div class="payment-methods">
 
-<section class="payment-page">
+    <div class="payment-section-title">
 
-
-    <div class="payment-heading">
-
-        <p class="eyebrow">
-            VOLK & VUUR
-        </p>
-
-        <h1>
-            Kies jou
-            <span> betaling.</span>
-        </h1>
-
-
-
-    </div>
-
-
-
-    <div class="payment-layout">
-
-
-        <!-- PAYMENT METHODS -->
-
-        <div class="payment-methods">
-
-            <div class="payment-section-title">
-
-
-
-                <div>
-
-                    <p class="eyebrow">
-                        BETALING
-                    </p>
-
-                    <h2>
-                        Betaalmetode
-                    </h2>
-
-                </div>
-
-            </div>
-
-
-
-            <label class="payment-option">
-
-                <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="card"
-                    checked
-                >
-
-                <div class="payment-option-content">
-
-                    <strong>
-                        Kaartbetaling
-                    </strong>
-
-                    <span>
-                        Visa / Mastercard
-                    </span>
-
-                </div>
-
-                <span class="payment-option-icon">
-                    💳
-                </span>
-
-            </label>
-
-
-
-            <label class="payment-option">
-
-                <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="eft"
-                >
-
-                <div class="payment-option-content">
-
-                    <strong>
-                        EFT / Bankbetaling
-                    </strong>
-
-                    <span>
-                        Betaal direk vanaf jou bankrekening
-                    </span>
-
-                </div>
-
-                <span class="payment-option-icon">
-                    🏦
-                </span>
-
-            </label>
-
-
-
-            <label class="payment-option">
-
-                <input
-                    type="radio"
-                    name="paymentMethod"
-                    value="capitec"
-                >
-
-                <div class="payment-option-content">
-
-                    <strong>
-                        Capitec Pay
-                    </strong>
-
-                    <span>
-                        Vinnige mobiele betaling
-                    </span>
-
-                </div>
-
-                <span class="payment-option-icon">
-                    📱
-                </span>
-
-            </label>
-
-
-
-            <div class="demo-payment-notice">
-
-                <strong>
-                    DEMO WINKEL
-                </strong>
-
-                <p>
-                    Hierdie betaalmetodes is tans
-                    demonstrasie-opsies. Geen werklike
-                    betaling sal gemaak word nie.
-                </p>
-
-            </div>
-
-
-
-            <button
-                type="button"
-                class="place-order-button"
-                id="completePaymentButton"
-            >
-                Voltooi bestelling
-            </button>
-
-
-            <a
-                href="checkout.html"
-                class="back-to-cart"
-            >
-                ← Terug na besonderhede
-            </a>
-
-        </div>
-
-
-
-        <!-- ORDER SUMMARY -->
-
-        <aside class="payment-summary">
+        <div>
 
             <p class="eyebrow">
-                JOU BESTELLING
+                PAYMENT
             </p>
 
             <h2>
-                Opsomming
+                Secure Payment
             </h2>
 
-
-            <div id="paymentItems">
-                <!-- Products loaded by JavaScript -->
-            </div>
-
-
-            <div class="checkout-summary-divider">
-            </div>
-
-
-            <div class="checkout-summary-total">
-
-                <span>
-                    Totaal
-                </span>
-
-                <strong id="paymentTotal">
-                    R0
-                </strong>
-
-            </div>
-
-
-            <p class="secure-checkout">
-                🔒 Veilige demo-betaling
-            </p>
-
-        </aside>
-
+        </div>
 
     </div>
 
-</section>
 
-</main>
+    <div class="payment-option yoco-payment-option">
+
+        <div class="payment-option-content">
+
+            <strong>
+                Pay with Yoco
+            </strong>
+
+            <span>
+                Secure online payment with Yoco
+            </span>
+
+        </div>
+
+        <span class="payment-option-icon">
+            💳
+        </span>
+
+    </div>
+
+
+    <div class="demo-payment-notice">
+
+        <strong>
+            SECURE PAYMENT
+        </strong>
+
+        <p>
+            You will be taken to Yoco to complete
+            your payment securely.
+        </p>
+
+    </div>
+
+    <div
+    class="demo-payment-notice"
+    id="paymentCancelledMessage"
+    style="display: none;"
+>
+
+    <strong>
+        PAYMENT CANCELLED
+    </strong>
+
+    <p>
+        Your payment was not completed.
+        Your cart has been safely stored.
+        You can try again when you are ready.
+    </p>
+
+</div>
+
+
+    <button
+        type="button"
+        class="place-order-button"
+        id="completePaymentButton"
+    >
+        Pay with Yoco
+    </button>
+
+
+    <a
+        href="checkout.html"
+        class="back-to-cart"
+    >
+        ← Back to Details
+    </a>
+
+</div>
 
 
 
@@ -332,6 +204,8 @@
 
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
 <script src="js/main.js"></script>
 
 </body>
